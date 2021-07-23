@@ -1,7 +1,7 @@
 # Employee_RMS_Blockchain
 This repository contains all the code to create blockchain-based employee record management system. 
 
-## Smart Contract
+## Steps to follow:
 1. First of all we need to create a smart contract using ChainIDE, available at https://chainide.com/. 
 2. Once we have completed writing down our smart contract, we need to comiple it, and after successful compilation we can get an ABI code.
 3. The third step is deployment of a smart contract on any blockchain. For this tutorial, we used Etherem Faucet network- Ropsten Test Network, before we can successfult deploy our smart contract on the blockchain, we need to install the metamask extension to our browser, and need to buy some faucet ethers to pay the gas fee for deploying the smart contract to the blockchain and make transactions to the deployed smart contract.
