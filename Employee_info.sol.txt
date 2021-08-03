@@ -1,0 +1,26 @@
+ pragma solidity =>0.5.1 <0.7.0;
+
+  contract employees_records
+ {
+ int id;
+ string f_name;
+ string last_name;
+ string address_;
+ string mob_no;
+
+
+function store_information (uint _id, string _f_name, string _last_name, string _address_, string _mob_no ) public 
+    {
+     id= _id;
+     f_name= _f_name;
+     last_name= _last_name;
+     address_= _address_
+     mob_no= _mob_no;
+    }
+
+function retrive_information(uint, string, string, string, string) public view returns
+    {
+     return(id, f_name, last_name, address_, mob_no);
+    }
+
+  }
