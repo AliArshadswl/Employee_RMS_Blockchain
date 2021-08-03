@@ -1,4 +1,4 @@
- pragma solidity =>0.5.1 <0.7.0;
+pragma solidity >=0.6.2 <0.7.0;
 
   contract employees_records
  {
@@ -9,18 +9,20 @@
  string mob_no;
 
 
-function store_information (uint _id, string _f_name, string _last_name, string _address_, string _mob_no ) public 
+function store_information (int _id, string memory _f_name, string memory _last_name, string memory _address, string memory _mob_no) public 
     {
      id= _id;
      f_name= _f_name;
      last_name= _last_name;
-     address_= _address_
+     address_= _address;
      mob_no= _mob_no;
     }
-
-function retrive_information(uint, string, string, string, string) public view returns
+   
+    function retrive_information() public view returns (int, string memory, string memory, string memory, string memory)
     {
      return(id, f_name, last_name, address_, mob_no);
     }
+
+
 
   }
