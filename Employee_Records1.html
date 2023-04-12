@@ -1,91 +1,103 @@
 <html>
-    <head>
 
-        <title>www.ems.co</title>
-        <link rel="stylesheet" type="text/css" href="employee_records.css">
-        
-    </head>
-        <body>
-          
-         <div id ="heading"> <h1> Blockchain Based Employee Record Management System</h1>
+<head>
 
-  <div class="wrapper">
-    <div class="form-signin">       
-      <h2 class="form-signin-heading">Please Enter Your Information</h2>
-       <input type="text" class="form-control" id="id" name="username" placeholder="Id" required="" autofocus="" />
-       <input type="text" class="form-control" id="f_name" name="username" placeholder="First Name" required="" autofocus="" />
-       <input type="text" class="form-control" id="l_name" name="username" placeholder="Last Name" required="" autofocus="" />
-       <input type="text" class="form-control" id="address" name="username" placeholder="Address" required="" autofocus="" />
+  <title>www.ems.co</title>
+  <link rel="stylesheet" type="text/css" href="employee_records.css">
+
+</head>
+
+<body>
+
+  <div id="heading">
+    <h1> Blockchain Based Employee Record Management System</h1>
+
+    <div class="wrapper">
+      <div class="form-signin">
+        <h2 class="form-signin-heading">Please Enter Your Information</h2>
+        <input type="text" class="form-control" id="id" name="username" placeholder="Id" required="" autofocus="" />
+        <input type="text" class="form-control" id="f_name" name="username" placeholder="First Name" required="" autofocus="" />
+        <input type="text" class="form-control" id="l_name" name="username" placeholder="Last Name" required="" autofocus="" />
+        <input type="text" class="form-control" id="address" name="username" placeholder="Address" required="" autofocus="" />
         <input type="text" class="form-control"id="mob_no" name="username" placeholder="Mob-No" required="" autofocus="" />
-      <button class="btn btn-lg btn-primary btn-block"  onclick="store_information();">Save</button>   
+        <button class="btn btn-lg btn-primary btn-block"  onclick="store_information();">Save</button>
+      </div>
+
     </div>
-     
-  </div>
-   <div class="wrapper">
-    <div class="form-signin">
-      <h2 class="form-signin-heading">Please Click to See Your Saved Information</h2>       
-      <button class="btn btn-lg btn-primary btn-block"  onclick="retrive_information();">Show</button>
-      </br>
-       <div  id="id_1"></div>
-       <div class="form-control" id="name_1"  /></div>
-       <div class="form-control" id="last_name_1" /></div>
-       <div class="form-control" id="address_1"  /></div>
-       <div class="form-control" id="mob_no_1"  /></div>  
+    <div class="wrapper">
+      <div class="form-signin">
+        <h2 class="form-signin-heading">Please Click to See Your Saved Information</h2>
+        <button class="btn btn-lg btn-primary btn-block"  onclick="retrive_information();">Show</button>
+        </br>
+        <div id="id_1"></div>
+        <div class="form-control" id="name_1" />
+      </div>
+      <div class="form-control" id="last_name_1" />
     </div>
+    <div class="form-control" id="address_1" />
+  </div>
+  <div class="form-control" id="mob_no_1" />
+  </div>
+  </div>
   </div>
   </div>
 
-     <script type="text/javascript">
-        async function loadWeb3() {
-            if (window.ethereum) {
-                window.web3 = new Web3(window.ethereum);
-                window.ethereum.enable();
-                
-            }
-        }
+  <script src='https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js'></script>
+  <script type="text/javascript">
+    async function loadWeb3() {
+      if (window.ethereum) {
+        window.web3 = new Web3(window.ethereum);
+        await window.ethereum.enable();
+        const accounts = await window.web3.eth.getAccounts();
+        window.currentAccount = accounts[0]
+      }
+    }
 
-        async function loadContract() {
-            // set ABI
-            var abi = [{"inputs":[],"name":"retrive_information","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"string","name":"","type":"string"},{"internalType":"string","name":"","type":"string"},{"internalType":"string","name":"","type":"string"},{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_f_name","type":"string"},{"internalType":"string","name":"_last_name","type":"string"},{"internalType":"string","name":"_address_","type":"string"},{"internalType":"string","name":"_mobno","type":"string"}],"name":"store_information","outputs":[],"stateMutability":"nonpayable","type":"function"}]
-            //set contract address
-            var contractAddress = '0x43c43eeBBabD4B398e5Fcbf4D5E07b0f12c7Ca4d';
+    async function loadContract() {
+      // set ABI
+      var abi = [{"inputs":[],"name":"retrive_information","outputs":[{"internalType":"int256","name":"","type":"int256"},{"internalType":"string","name":"","type":"string"},{"internalType":"string","name":"","type":"string"},{"internalType":"string","name":"","type":"string"},{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"int256","name":"_id","type":"int256"},{"internalType":"string","name":"_f_name","type":"string"},{"internalType":"string","name":"_last_name","type":"string"},{"internalType":"string","name":"_address","type":"string"},{"internalType":"string","name":"_mob_no","type":"string"}],"name":"store_information","outputs":[],"stateMutability":"nonpayable","type":"function"}]
+      //set contract address
+      var contractAddress = '0xa9faE996828b9ACac5B5e069f479432A74769c06';
 
-            return await new window.web3.eth.Contract(abi,contractAddress);
-        }
+      return await new window.web3.eth.Contract(abi,contractAddress);
+    }
 
-        async function store_information()
-        {
-
-        await window.contract.methods.store_information(document.getElementById("id").value, document.getElementById("f_name").value, document.getElementById("l_name").value, document.getElementById("address").value, document.getElementById("mob_no").value, ).send({from: '0xE2316234Fb49DaD4D3a57F08ed0BaD3CC590D2B6'})
+    async function store_information() {
+      const contract = await loadContract()
+      await contract.methods
+        .store_information(
+          document.getElementById("id").value,
+          document.getElementById("f_name").value,
+          document.getElementById("l_name").value,
+          document.getElementById("address").value,
+          document.getElementById("mob_no").value,
+        )
+        .send({from: window.currentAccount})
         .then(function(receipt){
          // receipt can also be a new contract instance, when coming from a "contract.deploy({...}).send()"
-         });
+        });
+    }
 
-        }
-         async function retrive_information()
-        {
-            load();
+    async function retrive_information() {
+      const contract = await loadContract()
+      await contract.methods.retrive_information().call({from: window.currentAccount}).then(function(result){
+        document.getElementById("id_1").innerHTML = "Your ID  is : " + result[0];
+        document.getElementById("name_1").innerHTML = "Your First Name is : " + result[1];
+        document.getElementById("last_name_1").innerHTML = "Your Last Name is : " + result[2];
+        document.getElementById("address_1").innerHTML = "Your Address is : " + result[3];
+        document.getElementById("mob_no_1").innerHTML = "Your Mobile No is : " + result[4];
+     });
+    }
 
-            await window.contract.methods.retrive_information().call({from: '0xE2316234Fb49DaD4D3a57F08ed0BaD3CC590D2B6'}, function(error, result){
-            document.getElementById("id_1").innerHTML = "Your ID  is : " + result[0];
-            document.getElementById("name_1").innerHTML = "Your First Name is : " + result[1];
-            document.getElementById("last_name_1").innerHTML = "Your Last Name is : " + result[2];
-            document.getElementById("address_1").innerHTML = "Your Address is : " + result[3];
-            document.getElementById("mob_no_1").innerHTML = "Your Mobile No is : " + result[4];
+    async function load() {
+      await loadWeb3();
+      window.contract = await loadContract();
+    }
+    
+    load();
 
+  </script>
 
-           });
-        }
-
-          async function load() {
-            await loadWeb3();
-            window.contract = await loadContract();
-        }
-        load();
-
-
-    </script>
-    <script src='https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js'></script>
-        
 </body>
+
 </html>
